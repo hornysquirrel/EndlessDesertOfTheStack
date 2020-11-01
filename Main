@@ -1,22 +1,22 @@
 #include<iostream>
 #include<string>
 
-struct TheSmallestGrainOfTheStack {
+struct Element {
     long long value;
-    TheSmallestGrainOfTheStack *next;
+    Element *next;
 };
 
-class EndlessDesertOfTheStack {
+class Stack {
 public:
-    TheSmallestGrainOfTheStack empty{};
-    TheSmallestGrainOfTheStack *PointerHead = &empty;
+    Element empty{};
+    Element *ptrHead = &empty;
     int len = 0;
     void push(long long n) {
-        auto *oleg = new TheSmallestGrainOfTheStack();
+        auto *oleg = new Element();
         (*oleg).value = n;
-        (*oleg).next = PointerHead;
+        (*oleg).next = ptrHead;
         len++;
-        PointerHead = oleg;
+        ptrHead = oleg;
         std::cout << "ok" << std::endl;
     }
     void pop(){
@@ -24,11 +24,11 @@ public:
             std::cout << "error" << std::endl;
         }
         else {
-            TheSmallestGrainOfTheStack *PointerDeath = PointerHead;
-            std::cout << (*PointerHead).value << std::endl;
-            PointerHead = (*PointerHead).next;
+            Element *ptrDeath = ptrHead;
+            std::cout << (*ptrHead).value << std::endl;
+            ptrHead = (*ptrHead).next;
             len--;
-            delete PointerDeath;
+            delete ptrDeath;
         }
     };
     void back() const{
@@ -36,21 +36,21 @@ public:
             std::cout << "error" << std::endl;
         }
         else{
-            std::cout << (*PointerHead).value << std::endl;
+            std::cout << (*ptrHead).value << std::endl;
         }
     };
     void size() const{
         std::cout << len << std::endl;
     };
     void clear(){
-        TheSmallestGrainOfTheStack *PointerLethal = PointerHead;
-        TheSmallestGrainOfTheStack *PointerDeath;
-        PointerDeath = PointerLethal;
-        PointerHead = &empty;
+        Element *ptrLethal = ptrHead;
+        Element *ptrDeath;
+        ptrDeath = ptrLethal;
+        ptrHead = &empty;
         for(int i = 0; i < len; i++) {
-            PointerLethal = (*PointerDeath).next;
-            delete PointerDeath;
-            PointerDeath = PointerLethal;
+            ptrLethal = (*ptrDeath).next;
+            delete ptrDeath;
+            ptrDeath = ptrLethal;
         }
         len = 0;
         std::cout << "ok" << std::endl;
@@ -65,7 +65,7 @@ int main() {
     std::string back = "back";
     std::string pop = "pop";
     std::string push = "push";
-    EndlessDesertOfTheStack Oleg;
+    Stack Stack;
     for(int i = 0; true; i++){
         std::cin >> move;
         if(move == exit){
@@ -73,21 +73,21 @@ int main() {
             return 0;
         }
         if(move == clear){
-            Oleg.clear();
+            Stack.clear();
         }
         if(move == size){
-            Oleg.size();
+            Stack.size();
         }
         if(move == back){
-            Oleg.back();
+            Stack.back();
         }
         if(move == pop){
-            Oleg.pop();
+            Stack.pop();
         }
         if(move == push){
             long long val;
             std::cin >> val;
-            Oleg.push(val);
+            Stack.push(val);
         }
     }
 }
