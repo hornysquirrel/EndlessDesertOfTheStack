@@ -6,8 +6,7 @@ struct Element {
     Element *next;
 };
 
-class Stack {
-public:
+struct Stack {
     Element empty{};
     Element *ptrHead = &empty;
     int len = 0;
